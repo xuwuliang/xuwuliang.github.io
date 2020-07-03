@@ -6,20 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Category: 问题 | 徐武亮的博客</title>
+  <title>JavaFX在线程中更新UI界面，解决方法一：继承Task类 | 徐武亮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="个人技术博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="徐武亮的博客">
-<meta property="og:url" content="http://yoursite.com/categories/%E9%97%AE%E9%A2%98/index.html">
+  <meta name="description" content="在线程中javafx更新界面使用了Platform.runLater等方式还是更新失败，界面总是无法更新，这时候可以尝试继承Task类来更新。  下面一段代码演示如何更新下载进度 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaFX在线程中更新UI界面，解决方法一：继承Task类">
+<meta property="og:url" content="http://yoursite.com/2020/07/03/%E7%AC%AC%E5%9B%9B%E7%AF%87%E5%8D%9A%E5%AE%A2/index.html">
 <meta property="og:site_name" content="徐武亮的博客">
-<meta property="og:description" content="个人技术博客">
+<meta property="og:description" content="在线程中javafx更新界面使用了Platform.runLater等方式还是更新失败，界面总是无法更新，这时候可以尝试继承Task类来更新。  下面一段代码演示如何更新下载进度 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-07-03T02:20:42.000Z">
+<meta property="article:modified_time" content="2020-07-03T02:44:57.401Z">
 <meta property="article:author" content="徐武亮">
-<meta property="article:tag" content="前端博客，后端博客，java">
-<meta property="article:tag" content="vue.js">
-<meta property="article:tag" content="jquery">
-<meta property="article:tag" content="springboot">
+<meta property="article:tag" content="javafx">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="徐武亮的博客" type="application/atom+xml">
@@ -148,71 +147,194 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-第四篇博客" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/02/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2020-07-02T02:38:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-02</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/02/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">Springboot前后端时间不一致的解决方法</a>
+    <h1 class="article-title" itemprop="name">
+      JavaFX在线程中更新UI界面，解决方法一：继承Task类
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/07/03/%E7%AC%AC%E5%9B%9B%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
+  	<time datetime="2020-07-03T02:20:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <br>
+在线程中javafx更新界面使用了Platform.runLater等方式还是更新失败，界面总是无法更新，这时候可以尝试继承Task类来更新。
+<br>
+下面一段代码演示如何更新下载进度
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line">public class Update_progress extends Thread &#123;&#x2F;&#x2F; 更新下载进度</span><br><span class="line">	private List&lt;Download_Thread&gt; list &#x3D; new ArrayList&lt;Download_Thread&gt;();&#x2F;&#x2F;下载线程列表</span><br><span class="line">	private ProgressBar progress;&#x2F;&#x2F;进度控件</span><br><span class="line">	private long bytes;&#x2F;&#x2F;总字节数</span><br><span class="line">	long sum &#x3D; 0;&#x2F;&#x2F;已下载字节数总和</span><br><span class="line">	private Label speed;&#x2F;&#x2F;下载速度控件</span><br><span class="line">	private long lastbyte &#x3D; 0;&#x2F;&#x2F;记录字节数</span><br><span class="line">	private long lasttime&#x3D;0;&#x2F;&#x2F;记录时间</span><br><span class="line">	private long nowbyte &#x3D; 0;&#x2F;&#x2F;记录字节数</span><br><span class="line">	private long nowtime&#x3D;0;&#x2F;&#x2F;记录时间</span><br><span class="line"></span><br><span class="line">	public Update_progress(List&lt;Download_Thread&gt; list, ProgressBar progress, long bytes,Label speed) &#123;</span><br><span class="line">		super();</span><br><span class="line">		this.list &#x3D; list;</span><br><span class="line">		this.progress &#x3D; progress;</span><br><span class="line">		this.bytes &#x3D; bytes;</span><br><span class="line">		this.speed &#x3D; speed;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void run() &#123;</span><br><span class="line">		Task task &#x3D; new Task&lt;String&gt;() &#123;</span><br><span class="line"></span><br><span class="line">			@Override</span><br><span class="line">			public void run() &#123;</span><br><span class="line"></span><br><span class="line">				updateProgress(sum, bytes);</span><br><span class="line">				if(sum &gt;&#x3D; bytes)&#123;</span><br><span class="line">					updateValue(&quot;下载成功&quot;);</span><br><span class="line">				&#125;else&#123;</span><br><span class="line">				updateValue(((nowbyte-lastbyte)*1000)&#x2F;((nowtime-lasttime)*1024)+&quot;KB&#x2F;S&quot;);</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			@Override</span><br><span class="line">			protected String call() throws Exception &#123;</span><br><span class="line">				&#x2F;&#x2F; TODO Auto-generated method stub</span><br><span class="line">				return null;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;;</span><br><span class="line">		Platform.runLater(new Runnable() &#123;</span><br><span class="line">			@Override</span><br><span class="line">			public void run() &#123;</span><br><span class="line">				progress.progressProperty().bind(task.progressProperty());</span><br><span class="line">				speed.textProperty().bind(task.valueProperty());</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">		sum &#x3D; 0;</span><br><span class="line">		for (Download_Thread t : list) &#123;</span><br><span class="line">			sum +&#x3D; t.getDownloaded();</span><br><span class="line">		&#125;</span><br><span class="line">		lastbyte&#x3D;sum;</span><br><span class="line">		lasttime &#x3D; System.currentTimeMillis();</span><br><span class="line">		try &#123;</span><br><span class="line">			Thread.sleep(50);</span><br><span class="line">		&#125; catch (InterruptedException e) &#123;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		while (true) &#123;</span><br><span class="line">			sum &#x3D; 0;</span><br><span class="line">			for (Download_Thread t : list) &#123;</span><br><span class="line">				sum +&#x3D; t.getDownloaded();</span><br><span class="line">			&#125;</span><br><span class="line">			nowbyte&#x3D;sum;</span><br><span class="line">			nowtime &#x3D; System.currentTimeMillis();</span><br><span class="line">			task.run();</span><br><span class="line">			if (sum &gt;&#x3D; bytes) &#123;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">			sum &#x3D; 0;</span><br><span class="line">			for (Download_Thread t : list) &#123;</span><br><span class="line">				sum +&#x3D; t.getDownloaded();</span><br><span class="line">			&#125;</span><br><span class="line">			lastbyte&#x3D;sum;</span><br><span class="line">			lasttime &#x3D; System.currentTimeMillis();</span><br><span class="line">			try &#123;</span><br><span class="line">				Thread.sleep(50);</span><br><span class="line">			&#125; catch (InterruptedException e) &#123;</span><br><span class="line">				&#x2F;&#x2F; TODO Auto-generated catch block</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		task.run();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+关注下面两段代码
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Task task &#x3D; new Task&lt;String&gt;() &#123;</span><br><span class="line">		@Override</span><br><span class="line">		public void run() &#123;</span><br><span class="line">			updateProgress(sum, bytes);</span><br><span class="line">			if(sum &gt;&#x3D; bytes)&#123;</span><br><span class="line">				updateValue(&quot;下载成功&quot;);</span><br><span class="line">			&#125;else&#123;</span><br><span class="line">			updateValue(((nowbyte-lastbyte)*1000)&#x2F;((nowtime-lasttime)*1024)+&quot;KB&#x2F;S&quot;);</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		@Override</span><br><span class="line">		protected String call() throws Exception &#123;</span><br><span class="line">			&#x2F;&#x2F; TODO Auto-generated method stub</span><br><span class="line">			return null;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;;</span><br><span class="line">	</span><br><span class="line">Platform.runLater(new Runnable() &#123;</span><br><span class="line">			@Override</span><br><span class="line">			public void run() &#123;</span><br><span class="line">				progress.progressProperty().bind(task.progressProperty());</span><br><span class="line">				speed.textProperty().bind(task.valueProperty());</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br></pre></td></tr></table></figure>
+首先你需要new一个task类，重写run()方法，updateProgress(sum, bytes)更新进度，updateValue()更新速度，
+使用<br>
+progress.progressProperty().bind(task.progressProperty());
+<br>
+speed.textProperty().bind(task.valueProperty());
+<br>
+将进度控件和速度控件的值和task绑定，在你需要更新下载进度和速度时使用task.run()即可。<br>
+可以这么理解，将控件的值和task的值进行绑定，在task的run方法中对task的值进行更新，那么控件的值也会一起更新。
+<br><br><br>
+<span id="busuanzi_container_page_pv">  本文总阅读量:<span id="busuanzi_value_page_pv"></span>次</span>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">springboot</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">javafx</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/问题//" class="article-tag-list-link color3">问题</a>
+        			<a href="/categories/经验//" class="article-tag-list-link color3">经验</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/03/%E7%AC%AC%E5%9B%9B%E7%AF%87%E5%8D%9A%E5%AE%A2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/07/03/%E7%AC%AC%E4%B8%89%E7%AF%87%E5%8D%9A%E5%AE%A2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Eclipse修改编码格式</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -239,10 +361,10 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",

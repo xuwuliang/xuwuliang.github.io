@@ -16,7 +16,7 @@
 <meta property="og:description" content="问题：实体类属性使用Timestamp来声明，页面传递到后台或者后台传递到页面的时间将会不一致，总是相差八个小时。  解决方法：在实体类的get方法前面添加下面代码。 1@JsonFormat(pattern &#x3D; &quot;yyyy-MM-dd HH:mm:ss&quot;, timezone &#x3D; &quot;GMT+8&quot;)  样例(以下为交易记录的实体类): 1">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-07-02T02:38:32.000Z">
-<meta property="article:modified_time" content="2020-07-02T06:07:22.745Z">
+<meta property="article:modified_time" content="2020-07-03T02:16:29.280Z">
 <meta property="article:author" content="徐武亮">
 <meta property="article:tag" content="springboot">
 <meta name="twitter:card" content="summary">
@@ -64,7 +64,7 @@
 			
 		</nav>
 		<nav>
-    总文章数 2
+    总文章数 4
 	</nav>
 		<nav class="header-smart-menu">
     		
@@ -176,7 +176,7 @@
 <p>样例(以下为交易记录的实体类):</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">public class Sales_record &#123;&#x2F;&#x2F;交易记录类</span><br><span class="line">	</span><br><span class="line">	   private int record_id;&#x2F;&#x2F;编号</span><br><span class="line">	   private String details;&#x2F;&#x2F;交易细节</span><br><span class="line">	   private String pay_way;&#x2F;&#x2F;支付方式</span><br><span class="line">	   private float total_money;&#x2F;&#x2F;总金额</span><br><span class="line">	   private float real_money;&#x2F;&#x2F;实付金额</span><br><span class="line">	   private Timestamp Transaction_date ;&#x2F;&#x2F;交易日期</span><br><span class="line">	   private int number;&#x2F;&#x2F;购买数量</span><br><span class="line">	   </span><br><span class="line">		public int getRecord_id() &#123;</span><br><span class="line">			return record_id;</span><br><span class="line">		&#125;</span><br><span class="line">		public void setRecord_id(int record_id) &#123;</span><br><span class="line">			this.record_id &#x3D; record_id;</span><br><span class="line">		&#125;</span><br><span class="line">		public String getDetails() &#123;</span><br><span class="line">			return details;</span><br><span class="line">		&#125;</span><br><span class="line">		public void setDetails(String details) &#123;</span><br><span class="line">			this.details &#x3D; details;</span><br><span class="line">		&#125;</span><br><span class="line">		public String getPay_way() &#123;</span><br><span class="line">			return pay_way;</span><br><span class="line">		&#125;</span><br><span class="line">		public void setPay_way(String pay_way) &#123;</span><br><span class="line">			this.pay_way &#x3D; pay_way;</span><br><span class="line">		&#125;</span><br><span class="line">		public float getTotal_money() &#123;</span><br><span class="line">			return total_money;</span><br><span class="line">		&#125;</span><br><span class="line">		public void setTotal_money(float total_money) &#123;</span><br><span class="line">			this.total_money &#x3D; total_money;</span><br><span class="line">		&#125;</span><br><span class="line">		public float getReal_money() &#123;</span><br><span class="line">			return real_money;</span><br><span class="line">		&#125;</span><br><span class="line">		public void setReal_money(float real_money) &#123;</span><br><span class="line">			this.real_money &#x3D; real_money;</span><br><span class="line">		&#125;</span><br><span class="line">	@JsonFormat(pattern &#x3D; &quot;yyyy-MM-dd HH:mm:ss&quot;, timezone &#x3D; &quot;GMT+8&quot;)</span><br><span class="line">	public Timestamp getTransaction_date() &#123;</span><br><span class="line">		return Transaction_date;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setTransaction_date(Timestamp transaction_date) &#123;</span><br><span class="line">		Transaction_date &#x3D; transaction_date;</span><br><span class="line">	&#125;</span><br><span class="line">	public int getNumber() &#123;</span><br><span class="line">		return number;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setNumber(int number) &#123;</span><br><span class="line">		this.number &#x3D; number;</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public String toString() &#123;</span><br><span class="line">		return &quot;Sales_record [record_id&#x3D;&quot; + record_id + &quot;, details&#x3D;&quot; + details + &quot;, pay_way&#x3D;&quot; + pay_way</span><br><span class="line">				+ &quot;, total_money&#x3D;&quot; + total_money + &quot;, real_money&#x3D;&quot; + real_money + &quot;, Transaction_date&#x3D;&quot;</span><br><span class="line">				+ Transaction_date + &quot;, number&#x3D;&quot; + number + &quot;]&quot;;</span><br><span class="line">	&#125;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><br><br><br><br><span id="busuanzi_container_page_pv">  本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
+<p><br><br><br><br><span id="busuanzi_container_page_pv">  本文总阅读量:<span id="busuanzi_value_page_pv"></span>次</span></p>
 
       
 
@@ -431,6 +431,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">springboot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">乱码</a>
               </li>
              
               <li class="article-tag-list-item">

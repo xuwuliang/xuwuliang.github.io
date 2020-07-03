@@ -65,7 +65,7 @@
 			
 		</nav>
 		<nav>
-    总文章数 2
+    总文章数 4
 	</nav>
 		<nav class="header-smart-menu">
     		
@@ -150,6 +150,202 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-第四篇博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/03/%E7%AC%AC%E5%9B%9B%E7%AF%87%E5%8D%9A%E5%AE%A2/">JavaFX在线程中更新UI界面，解决方法一：继承Task类</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/03/%E7%AC%AC%E5%9B%9B%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
+  	<time datetime="2020-07-03T02:20:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <br>
+在线程中javafx更新界面使用了Platform.runLater等方式还是更新失败，界面总是无法更新，这时候可以尝试继承Task类来更新。
+<br>
+下面一段代码演示如何更新下载进度
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line">public class Update_progress extends Thread &#123;&#x2F;&#x2F; 更新下载进度</span><br><span class="line">	private List&lt;Download_Thread&gt; list &#x3D; new ArrayList&lt;Download_Thread&gt;();&#x2F;&#x2F;下载线程列表</span><br><span class="line">	private ProgressBar progress;&#x2F;&#x2F;进度控件</span><br><span class="line">	private long bytes;&#x2F;&#x2F;总字节数</span><br><span class="line">	long sum &#x3D; 0;&#x2F;&#x2F;已下载字节数总和</span><br><span class="line">	private Label speed;&#x2F;&#x2F;下载速度控件</span><br><span class="line">	private long lastbyte &#x3D; 0;&#x2F;&#x2F;记录字节数</span><br><span class="line">	private long lasttime&#x3D;0;&#x2F;&#x2F;记录时间</span><br><span class="line">	private long nowbyte &#x3D; 0;&#x2F;&#x2F;记录字节数</span><br><span class="line">	private long nowtime&#x3D;0;&#x2F;&#x2F;记录时间</span><br><span class="line"></span><br><span class="line">	public Update_progress(List&lt;Download_Thread&gt; list, ProgressBar progress, long bytes,Label speed) &#123;</span><br><span class="line">		super();</span><br><span class="line">		this.list &#x3D; list;</span><br><span class="line">		this.progress &#x3D; progress;</span><br><span class="line">		this.bytes &#x3D; bytes;</span><br><span class="line">		this.speed &#x3D; speed;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public void run() &#123;</span><br><span class="line">		Task task &#x3D; new Task&lt;String&gt;() &#123;</span><br><span class="line"></span><br><span class="line">			@Override</span><br><span class="line">			public void run() &#123;</span><br><span class="line"></span><br><span class="line">				updateProgress(sum, bytes);</span><br><span class="line">				if(sum &gt;&#x3D; bytes)&#123;</span><br><span class="line">					updateValue(&quot;下载成功&quot;);</span><br><span class="line">				&#125;else&#123;</span><br><span class="line">				updateValue(((nowbyte-lastbyte)*1000)&#x2F;((nowtime-lasttime)*1024)+&quot;KB&#x2F;S&quot;);</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			@Override</span><br><span class="line">			protected String call() throws Exception &#123;</span><br><span class="line">				&#x2F;&#x2F; TODO Auto-generated method stub</span><br><span class="line">				return null;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;;</span><br><span class="line">		Platform.runLater(new Runnable() &#123;</span><br><span class="line">			@Override</span><br><span class="line">			public void run() &#123;</span><br><span class="line">				progress.progressProperty().bind(task.progressProperty());</span><br><span class="line">				speed.textProperty().bind(task.valueProperty());</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">		sum &#x3D; 0;</span><br><span class="line">		for (Download_Thread t : list) &#123;</span><br><span class="line">			sum +&#x3D; t.getDownloaded();</span><br><span class="line">		&#125;</span><br><span class="line">		lastbyte&#x3D;sum;</span><br><span class="line">		lasttime &#x3D; System.currentTimeMillis();</span><br><span class="line">		try &#123;</span><br><span class="line">			Thread.sleep(50);</span><br><span class="line">		&#125; catch (InterruptedException e) &#123;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		while (true) &#123;</span><br><span class="line">			sum &#x3D; 0;</span><br><span class="line">			for (Download_Thread t : list) &#123;</span><br><span class="line">				sum +&#x3D; t.getDownloaded();</span><br><span class="line">			&#125;</span><br><span class="line">			nowbyte&#x3D;sum;</span><br><span class="line">			nowtime &#x3D; System.currentTimeMillis();</span><br><span class="line">			task.run();</span><br><span class="line">			if (sum &gt;&#x3D; bytes) &#123;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">			sum &#x3D; 0;</span><br><span class="line">			for (Download_Thread t : list) &#123;</span><br><span class="line">				sum +&#x3D; t.getDownloaded();</span><br><span class="line">			&#125;</span><br><span class="line">			lastbyte&#x3D;sum;</span><br><span class="line">			lasttime &#x3D; System.currentTimeMillis();</span><br><span class="line">			try &#123;</span><br><span class="line">				Thread.sleep(50);</span><br><span class="line">			&#125; catch (InterruptedException e) &#123;</span><br><span class="line">				&#x2F;&#x2F; TODO Auto-generated catch block</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		task.run();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+关注下面两段代码
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Task task &#x3D; new Task&lt;String&gt;() &#123;</span><br><span class="line">		@Override</span><br><span class="line">		public void run() &#123;</span><br><span class="line">			updateProgress(sum, bytes);</span><br><span class="line">			if(sum &gt;&#x3D; bytes)&#123;</span><br><span class="line">				updateValue(&quot;下载成功&quot;);</span><br><span class="line">			&#125;else&#123;</span><br><span class="line">			updateValue(((nowbyte-lastbyte)*1000)&#x2F;((nowtime-lasttime)*1024)+&quot;KB&#x2F;S&quot;);</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		@Override</span><br><span class="line">		protected String call() throws Exception &#123;</span><br><span class="line">			&#x2F;&#x2F; TODO Auto-generated method stub</span><br><span class="line">			return null;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;;</span><br><span class="line">	</span><br><span class="line">Platform.runLater(new Runnable() &#123;</span><br><span class="line">			@Override</span><br><span class="line">			public void run() &#123;</span><br><span class="line">				progress.progressProperty().bind(task.progressProperty());</span><br><span class="line">				speed.textProperty().bind(task.valueProperty());</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br></pre></td></tr></table></figure>
+首先你需要new一个task类，重写run()方法，updateProgress(sum, bytes)更新进度，updateValue()更新速度，
+使用<br>
+progress.progressProperty().bind(task.progressProperty());
+<br>
+speed.textProperty().bind(task.valueProperty());
+<br>
+将进度控件和速度控件的值和task绑定，在你需要更新下载进度和速度时使用task.run()即可。<br>
+可以这么理解，将控件的值和task的值进行绑定，在task的run方法中对task的值进行更新，那么控件的值也会一起更新。
+<br><br><br>
+<span id="busuanzi_container_page_pv">  本文总阅读量:<span id="busuanzi_value_page_pv"></span>次</span>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">javafx</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/经验//" class="article-tag-list-link color3">经验</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/03/%E7%AC%AC%E5%9B%9B%E7%AF%87%E5%8D%9A%E5%AE%A2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-第三篇博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/03/%E7%AC%AC%E4%B8%89%E7%AF%87%E5%8D%9A%E5%AE%A2/">Eclipse修改编码格式</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/03/%E7%AC%AC%E4%B8%89%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
+  	<time datetime="2020-07-03T02:10:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <br>
+<br>
+在Eclipse的开发使用中,我们经常使用的是UTF-8,但是刚刚安装的或者是导入的项目是其他编码的默认是GBK的,
+这就造成我们的项目乱码,一些中文解析无法查看,对我们的开发造成不便.
+<br>
+1.进入Eclipse,导入一个项目工程,如果项目文件的编码与你的工具编码不一致 将会造成乱码。
+<br>
+2.在菜单导航栏上Window-->Preferences 打开"首选项"对话框，左侧导航树，导航到 General-->Workspace，
+可以看到默认的是GBK编码格式,我们修改为UTF-8编码格式或者是你需要的编码格式  点击Apply,点击OK.
+
+<p><br><br><br><br><span id="busuanzi_container_page_pv">  本文总阅读量:<span id="busuanzi_value_page_pv"></span>次</span></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">乱码</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/经验//" class="article-tag-list-link color3">经验</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/03/%E7%AC%AC%E4%B8%89%E7%AF%87%E5%8D%9A%E5%AE%A2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-第二篇博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -192,7 +388,7 @@
 <a href="https://pan.baidu.com/s/1cUD4eyKNedt_mX-v_bFDYQ" title="" target="">网盘地址</a>
 
 
-<p>提取码:w1bg<br><br><br><br><br><span id="busuanzi_container_page_pv">  本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
+<p>提取码:w1bg<br><br><br><br><br><span id="busuanzi_container_page_pv">  本文总阅读量:<span id="busuanzi_value_page_pv"></span>次</span></p>
 
       
 
@@ -294,7 +490,7 @@
 <p>样例(以下为交易记录的实体类):</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">public class Sales_record &#123;&#x2F;&#x2F;交易记录类</span><br><span class="line">	</span><br><span class="line">	   private int record_id;&#x2F;&#x2F;编号</span><br><span class="line">	   private String details;&#x2F;&#x2F;交易细节</span><br><span class="line">	   private String pay_way;&#x2F;&#x2F;支付方式</span><br><span class="line">	   private float total_money;&#x2F;&#x2F;总金额</span><br><span class="line">	   private float real_money;&#x2F;&#x2F;实付金额</span><br><span class="line">	   private Timestamp Transaction_date ;&#x2F;&#x2F;交易日期</span><br><span class="line">	   private int number;&#x2F;&#x2F;购买数量</span><br><span class="line">	   </span><br><span class="line">		public int getRecord_id() &#123;</span><br><span class="line">			return record_id;</span><br><span class="line">		&#125;</span><br><span class="line">		public void setRecord_id(int record_id) &#123;</span><br><span class="line">			this.record_id &#x3D; record_id;</span><br><span class="line">		&#125;</span><br><span class="line">		public String getDetails() &#123;</span><br><span class="line">			return details;</span><br><span class="line">		&#125;</span><br><span class="line">		public void setDetails(String details) &#123;</span><br><span class="line">			this.details &#x3D; details;</span><br><span class="line">		&#125;</span><br><span class="line">		public String getPay_way() &#123;</span><br><span class="line">			return pay_way;</span><br><span class="line">		&#125;</span><br><span class="line">		public void setPay_way(String pay_way) &#123;</span><br><span class="line">			this.pay_way &#x3D; pay_way;</span><br><span class="line">		&#125;</span><br><span class="line">		public float getTotal_money() &#123;</span><br><span class="line">			return total_money;</span><br><span class="line">		&#125;</span><br><span class="line">		public void setTotal_money(float total_money) &#123;</span><br><span class="line">			this.total_money &#x3D; total_money;</span><br><span class="line">		&#125;</span><br><span class="line">		public float getReal_money() &#123;</span><br><span class="line">			return real_money;</span><br><span class="line">		&#125;</span><br><span class="line">		public void setReal_money(float real_money) &#123;</span><br><span class="line">			this.real_money &#x3D; real_money;</span><br><span class="line">		&#125;</span><br><span class="line">	@JsonFormat(pattern &#x3D; &quot;yyyy-MM-dd HH:mm:ss&quot;, timezone &#x3D; &quot;GMT+8&quot;)</span><br><span class="line">	public Timestamp getTransaction_date() &#123;</span><br><span class="line">		return Transaction_date;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setTransaction_date(Timestamp transaction_date) &#123;</span><br><span class="line">		Transaction_date &#x3D; transaction_date;</span><br><span class="line">	&#125;</span><br><span class="line">	public int getNumber() &#123;</span><br><span class="line">		return number;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setNumber(int number) &#123;</span><br><span class="line">		this.number &#x3D; number;</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public String toString() &#123;</span><br><span class="line">		return &quot;Sales_record [record_id&#x3D;&quot; + record_id + &quot;, details&#x3D;&quot; + details + &quot;, pay_way&#x3D;&quot; + pay_way</span><br><span class="line">				+ &quot;, total_money&#x3D;&quot; + total_money + &quot;, real_money&#x3D;&quot; + real_money + &quot;, Transaction_date&#x3D;&quot;</span><br><span class="line">				+ Transaction_date + &quot;, number&#x3D;&quot; + number + &quot;]&quot;;</span><br><span class="line">	&#125;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><br><br><br><br><span id="busuanzi_container_page_pv">  本文总阅读量<span id="busuanzi_value_page_pv"></span>次</span></p>
+<p><br><br><br><br><span id="busuanzi_container_page_pv">  本文总阅读量:<span id="busuanzi_value_page_pv"></span>次</span></p>
 
       
 
@@ -459,6 +655,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">springboot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">乱码</a>
               </li>
              
               <li class="article-tag-list-item">
