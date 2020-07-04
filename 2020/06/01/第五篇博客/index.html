@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Springboot前后端时间不一致的解决方法 | 徐武亮的博客</title>
+  <title>Set和List的区别 | 徐武亮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="问题：实体类属性使用Timestamp来声明，页面传递到后台或者后台传递到页面的时间将会不一致，总是相差八个小时。  解决方法：在实体类的get方法前面添加下面代码。 1@JsonFormat(pattern &#x3D; &quot;yyyy-MM-dd HH:mm:ss&quot;, timezone &#x3D; &quot;GMT+8&quot;)  样例(以下为交易记录的实体类): 1">
+  <meta name="description" content="Set和List的区别，主要有下面三点:  1. Set 接口实例存储的是无序的，不重复的数据。List 接口实例存储的是有序的，可以重复的元素。  2. Set检索效率低下，删除和插入效率高，插入和删除不会引起元素位置改变 。  3. List和数组类似，可以动态增长，根据实际存储的数据的长度自动增长List的长度。查找元素效率高，插入删除效率低，因为会引起其他元素位置改变  。    本文总">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Springboot前后端时间不一致的解决方法">
-<meta property="og:url" content="http://yoursite.com/2020/07/02/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:title" content="Set和List的区别">
+<meta property="og:url" content="http://yoursite.com/2020/06/01/%E7%AC%AC%E4%BA%94%E7%AF%87%E5%8D%9A%E5%AE%A2/index.html">
 <meta property="og:site_name" content="徐武亮的博客">
-<meta property="og:description" content="问题：实体类属性使用Timestamp来声明，页面传递到后台或者后台传递到页面的时间将会不一致，总是相差八个小时。  解决方法：在实体类的get方法前面添加下面代码。 1@JsonFormat(pattern &#x3D; &quot;yyyy-MM-dd HH:mm:ss&quot;, timezone &#x3D; &quot;GMT+8&quot;)  样例(以下为交易记录的实体类): 1">
+<meta property="og:description" content="Set和List的区别，主要有下面三点:  1. Set 接口实例存储的是无序的，不重复的数据。List 接口实例存储的是有序的，可以重复的元素。  2. Set检索效率低下，删除和插入效率高，插入和删除不会引起元素位置改变 。  3. List和数组类似，可以动态增长，根据实际存储的数据的长度自动增长List的长度。查找元素效率高，插入删除效率低，因为会引起其他元素位置改变  。    本文总">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-07-02T02:38:32.000Z">
-<meta property="article:modified_time" content="2020-07-03T02:16:29.280Z">
+<meta property="article:published_time" content="2020-06-01T09:02:57.000Z">
+<meta property="article:modified_time" content="2020-07-04T09:13:13.163Z">
 <meta property="article:author" content="徐武亮">
-<meta property="article:tag" content="springboot">
+<meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="徐武亮的博客" type="application/atom+xml">
@@ -64,7 +64,7 @@
 			
 		</nav>
 		<nav>
-    总文章数 4
+    总文章数 6
 	</nav>
 		<nav class="header-smart-menu">
     		
@@ -147,20 +147,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-第一篇博客" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-第五篇博客" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Springboot前后端时间不一致的解决方法
+      Set和List的区别
     </h1>
   
 
         
-        <a href="/2020/07/02/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2020-07-02T02:38:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-02</time>
+        <a href="/2020/06/01/%E7%AC%AC%E4%BA%94%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
+  	<time datetime="2020-06-01T09:02:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-01</time>
 </a>
         
       </header>
@@ -168,15 +168,15 @@
     <div class="article-entry" itemprop="articleBody">
       
         <br>
-问题：实体类属性使用Timestamp来声明，页面传递到后台或者后台传递到页面的时间将会不一致，总是相差八个小时。
+Set和List的区别，主要有下面三点:
 <br>
-解决方法：在实体类的get方法前面添加下面代码。
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@JsonFormat(pattern &#x3D; &quot;yyyy-MM-dd HH:mm:ss&quot;, timezone &#x3D; &quot;GMT+8&quot;)</span><br></pre></td></tr></table></figure>
-
-<p>样例(以下为交易记录的实体类):</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">public class Sales_record &#123;&#x2F;&#x2F;交易记录类</span><br><span class="line">	</span><br><span class="line">	   private int record_id;&#x2F;&#x2F;编号</span><br><span class="line">	   private String details;&#x2F;&#x2F;交易细节</span><br><span class="line">	   private String pay_way;&#x2F;&#x2F;支付方式</span><br><span class="line">	   private float total_money;&#x2F;&#x2F;总金额</span><br><span class="line">	   private float real_money;&#x2F;&#x2F;实付金额</span><br><span class="line">	   private Timestamp Transaction_date ;&#x2F;&#x2F;交易日期</span><br><span class="line">	   private int number;&#x2F;&#x2F;购买数量</span><br><span class="line">	   </span><br><span class="line">		public int getRecord_id() &#123;</span><br><span class="line">			return record_id;</span><br><span class="line">		&#125;</span><br><span class="line">		public void setRecord_id(int record_id) &#123;</span><br><span class="line">			this.record_id &#x3D; record_id;</span><br><span class="line">		&#125;</span><br><span class="line">		public String getDetails() &#123;</span><br><span class="line">			return details;</span><br><span class="line">		&#125;</span><br><span class="line">		public void setDetails(String details) &#123;</span><br><span class="line">			this.details &#x3D; details;</span><br><span class="line">		&#125;</span><br><span class="line">		public String getPay_way() &#123;</span><br><span class="line">			return pay_way;</span><br><span class="line">		&#125;</span><br><span class="line">		public void setPay_way(String pay_way) &#123;</span><br><span class="line">			this.pay_way &#x3D; pay_way;</span><br><span class="line">		&#125;</span><br><span class="line">		public float getTotal_money() &#123;</span><br><span class="line">			return total_money;</span><br><span class="line">		&#125;</span><br><span class="line">		public void setTotal_money(float total_money) &#123;</span><br><span class="line">			this.total_money &#x3D; total_money;</span><br><span class="line">		&#125;</span><br><span class="line">		public float getReal_money() &#123;</span><br><span class="line">			return real_money;</span><br><span class="line">		&#125;</span><br><span class="line">		public void setReal_money(float real_money) &#123;</span><br><span class="line">			this.real_money &#x3D; real_money;</span><br><span class="line">		&#125;</span><br><span class="line">	@JsonFormat(pattern &#x3D; &quot;yyyy-MM-dd HH:mm:ss&quot;, timezone &#x3D; &quot;GMT+8&quot;)</span><br><span class="line">	public Timestamp getTransaction_date() &#123;</span><br><span class="line">		return Transaction_date;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setTransaction_date(Timestamp transaction_date) &#123;</span><br><span class="line">		Transaction_date &#x3D; transaction_date;</span><br><span class="line">	&#125;</span><br><span class="line">	public int getNumber() &#123;</span><br><span class="line">		return number;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setNumber(int number) &#123;</span><br><span class="line">		this.number &#x3D; number;</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public String toString() &#123;</span><br><span class="line">		return &quot;Sales_record [record_id&#x3D;&quot; + record_id + &quot;, details&#x3D;&quot; + details + &quot;, pay_way&#x3D;&quot; + pay_way</span><br><span class="line">				+ &quot;, total_money&#x3D;&quot; + total_money + &quot;, real_money&#x3D;&quot; + real_money + &quot;, Transaction_date&#x3D;&quot;</span><br><span class="line">				+ Transaction_date + &quot;, number&#x3D;&quot; + number + &quot;]&quot;;</span><br><span class="line">	&#125;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><br><br><br><br><span id="busuanzi_container_page_pv">  本文总阅读量:<span id="busuanzi_value_page_pv"></span>次</span></p>
+1. Set 接口实例存储的是无序的，不重复的数据。List 接口实例存储的是有序的，可以重复的元素。
+<br>
+2. Set检索效率低下，删除和插入效率高，插入和删除不会引起元素位置改变 <实现类有HashSet,TreeSet>。
+<br>
+3. List和数组类似，可以动态增长，根据实际存储的数据的长度自动增长List的长度。查找元素效率高，插入删除效率低，因为会引起其他元素位置改变 <实现类有ArrayList,LinkedList,Vector> 。
+<br><br><br>
+<span id="busuanzi_container_page_pv">  本文总阅读量:<span id="busuanzi_value_page_pv"></span>
 
       
 
@@ -211,7 +211,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">springboot</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -223,7 +223,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/问题//" class="article-tag-list-link color3">问题</a>
+        			<a href="/categories/经验//" class="article-tag-list-link color3">经验</a>
         		</li>
       		
 		</ul>
@@ -278,7 +278,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/02/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/06/01/%E7%AC%AC%E4%BA%94%E7%AF%87%E5%8D%9A%E5%AE%A2/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -292,11 +292,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/07/02/%E7%AC%AC%E4%BA%8C%E7%AF%87%E5%8D%9A%E5%AE%A2/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/06/17/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          基于javafx的多线程下载器
+          Springboot前后端时间不一致的解决方法
         
       </div>
     </a>
@@ -430,11 +430,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">springboot</a>
+                <a href="javascript:void(0)" class="js-tag color3">乱码</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">乱码</a>
+                <a href="javascript:void(0)" class="js-tag color1">springboot</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -447,6 +447,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">tcp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
               </li>
             
             <div class="clearfix"></div>
