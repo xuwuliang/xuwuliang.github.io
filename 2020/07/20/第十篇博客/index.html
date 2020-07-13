@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: HTML | 徐武亮的博客</title>
+  <title>spring整合mybatis | 徐武亮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="个人技术博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="徐武亮的博客">
-<meta property="og:url" content="http://yoursite.com/tags/HTML/index.html">
+  <meta name="description" content="配置文件如下 1234567891011121314151617181920212223242526272829303132333435363738394041&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;&lt;beans xmlns&#x3D;&quot;http:&#x2F;&#x2F;ww">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring整合mybatis">
+<meta property="og:url" content="http://yoursite.com/2020/07/20/%E7%AC%AC%E5%8D%81%E7%AF%87%E5%8D%9A%E5%AE%A2/index.html">
 <meta property="og:site_name" content="徐武亮的博客">
-<meta property="og:description" content="个人技术博客">
+<meta property="og:description" content="配置文件如下 1234567891011121314151617181920212223242526272829303132333435363738394041&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;&lt;beans xmlns&#x3D;&quot;http:&#x2F;&#x2F;ww">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-07-20T02:35:14.000Z">
+<meta property="article:modified_time" content="2020-07-13T03:00:38.103Z">
 <meta property="article:author" content="徐武亮">
-<meta property="article:tag" content="前端博客，后端博客，java">
-<meta property="article:tag" content="vue.js">
-<meta property="article:tag" content="jquery">
-<meta property="article:tag" content="springboot">
+<meta property="article:tag" content="spring">
+<meta property="article:tag" content="mybatis">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="徐武亮的博客" type="application/atom+xml">
@@ -148,48 +148,74 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-第十篇博客" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/05/%E7%AC%AC%E5%85%AD%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2020-07-05T09:18:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-05</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/05/%E7%AC%AC%E5%85%AD%E7%AF%87%E5%8D%9A%E5%AE%A2/">超链接打开新窗口</a>
+    <h1 class="article-title" itemprop="name">
+      spring整合mybatis
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/07/20/%E7%AC%AC%E5%8D%81%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
+  	<time datetime="2020-07-20T02:35:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><br><br><br>配置文件如下<br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&quot;</span><br><span class="line">       xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;</span><br><span class="line">       xmlns:context&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context&quot;</span><br><span class="line">       xmlns:aop&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;aop&quot;</span><br><span class="line">       xmlns:tx&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;tx&quot;</span><br><span class="line">       xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans</span><br><span class="line">	http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&#x2F;spring-beans.xsd</span><br><span class="line">	http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context</span><br><span class="line">	http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context&#x2F;spring-context.xsd</span><br><span class="line">	http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;aop</span><br><span class="line">	http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;aop&#x2F;spring-aop.xsd</span><br><span class="line">	http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;tx</span><br><span class="line">	http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;tx&#x2F;spring-tx.xsd&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--开启注解的扫描，希望处理service和dao，controller不需要Spring框架去处理--&gt;</span><br><span class="line">    &lt;context:component-scan base-package&#x3D;&quot;edu.xwl&quot; &gt;</span><br><span class="line">        &lt;!--配置哪些注解不扫描--&gt;</span><br><span class="line">        &lt;context:exclude-filter type&#x3D;&quot;annotation&quot; expression&#x3D;&quot;org.springframework.stereotype.Controller&quot; &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;context:component-scan&gt;</span><br><span class="line">&lt;!-- 加载配置文件 --&gt; </span><br><span class="line">&lt;context:property-placeholder location&#x3D;&quot;classpath:jdbcConfig.properties&quot; &#x2F;&gt;</span><br><span class="line">    &lt;!--Spring整合MyBatis框架--&gt;</span><br><span class="line">    &lt;!--配置连接池--&gt;</span><br><span class="line">     &lt;bean id&#x3D;&quot;dataSource&quot; class&#x3D;&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;driverClass&quot; value&#x3D;&quot;$&#123;jdbc.driver&#125;&quot;&#x2F;&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;jdbcUrl&quot; value&#x3D;&quot;$&#123;jdbc.url&#125;&quot;&#x2F;&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;user&quot; value&#x3D;&quot;$&#123;jdbc.username&#125;&quot;&#x2F;&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;password&quot; value&#x3D;&quot;$&#123;jdbc.password&#125;&quot;&#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;bean&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--配置SqlSessionFactory工厂--&gt;</span><br><span class="line">    &lt;bean id&#x3D;&quot;sqlSessionFactory&quot; class&#x3D;&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;dataSource&quot; ref&#x3D;&quot;dataSource&quot; &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;bean&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--配置AccountDao接口所在包--&gt;&lt;!-- 配置Mapper扫描器 --&gt;</span><br><span class="line">    &lt;bean id&#x3D;&quot;mapperScanner&quot; class&#x3D;&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;basePackage&quot; value&#x3D;&quot;edu.xwl.dao&quot;&#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;bean&gt;</span><br><span class="line">&lt;&#x2F;beans&gt;</span><br></pre></td></tr></table></figure>
+<p>总结一下Spring整合MyBatis框架分为以下三步<br><br>1.配置连接池<br><br>2.配置SqlSessionFactory工厂<br><br>3.配置Mapper扫描器<br><br><br><br><br><br><span id="busuanzi_container_page_pv">  本文总阅读量:<span id="busuanzi_value_page_pv"></span>次</span></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">HTML</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mybatis</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -202,17 +228,104 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/20/%E7%AC%AC%E5%8D%81%E7%AF%87%E5%8D%9A%E5%AE%A2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/07/15/%E7%AC%AC%E4%B9%9D%E7%AF%87%E5%8D%9A%E5%AE%A2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">springMVC中RequestParam注解中name和value两个属性的区别</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -239,9 +352,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

@@ -6,20 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: HTML | 徐武亮的博客</title>
+  <title>JDK1.8的新特性 | 徐武亮的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="个人技术博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="徐武亮的博客">
-<meta property="og:url" content="http://yoursite.com/tags/HTML/index.html">
+  <meta name="description" content="JDK1.8的新特性 一、接口的默认方法 Java 8允许我们给接口添加一个非抽象的方法实现，只需要使用 default关键字即可，这个特征又叫做扩展方法。 二、Lambda 表达式 在Java 8 中你就没必要使用这种传统的匿名对象的方式了，Java 8提供了lambda表达式。 三、函数式接口 Lambda表达式是如何在java的类型系统中表示的呢？每一个lambda表达式都对应一个类型，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JDK1.8的新特性">
+<meta property="og:url" content="http://yoursite.com/2020/07/09/%E7%AC%AC%E4%B8%83%E7%AF%87%E5%8D%9A%E5%AE%A2/index.html">
 <meta property="og:site_name" content="徐武亮的博客">
-<meta property="og:description" content="个人技术博客">
+<meta property="og:description" content="JDK1.8的新特性 一、接口的默认方法 Java 8允许我们给接口添加一个非抽象的方法实现，只需要使用 default关键字即可，这个特征又叫做扩展方法。 二、Lambda 表达式 在Java 8 中你就没必要使用这种传统的匿名对象的方式了，Java 8提供了lambda表达式。 三、函数式接口 Lambda表达式是如何在java的类型系统中表示的呢？每一个lambda表达式都对应一个类型，">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-07-09T01:47:01.000Z">
+<meta property="article:modified_time" content="2020-07-13T01:59:25.998Z">
 <meta property="article:author" content="徐武亮">
-<meta property="article:tag" content="前端博客，后端博客，java">
-<meta property="article:tag" content="vue.js">
-<meta property="article:tag" content="jquery">
-<meta property="article:tag" content="springboot">
+<meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="徐武亮的博客" type="application/atom+xml">
@@ -148,48 +147,88 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-第七篇博客" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/05/%E7%AC%AC%E5%85%AD%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2020-07-05T09:18:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-05</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/05/%E7%AC%AC%E5%85%AD%E7%AF%87%E5%8D%9A%E5%AE%A2/">超链接打开新窗口</a>
+    <h1 class="article-title" itemprop="name">
+      JDK1.8的新特性
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/07/09/%E7%AC%AC%E4%B8%83%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
+  	<time datetime="2020-07-09T01:47:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <br>
+<br>
+JDK1.8的新特性<br>
+一、接口的默认方法<br>
+Java 8允许我们给接口添加一个非抽象的方法实现，只需要使用 default关键字即可，这个特征又叫做扩展方法。<br>
+二、Lambda 表达式<br>
+在Java 8 中你就没必要使用这种传统的匿名对象的方式了，Java 8提供了lambda表达式。<br>
+三、函数式接口<br>
+Lambda表达式是如何在java的类型系统中表示的呢？每一个lambda表达式都对应一个类型，通常是接口类型。而“函数式接口”是指仅仅只包含一个抽象方法的接口，每一个该类型的lambda表达式都会被匹配到这个抽象方法。因为 默认方法 不算抽象方法，所以你也可以给你的函数式接口添加默认方法。<br> 
+四、方法与构造函数引用<br>
+Java 8 允许你使用::关键字来传递方法或者构造函数引用。<br>
+五、Lambda 作用域<br>
+在lambda表达式中访问外层作用域和老版本的匿名对象中的方式很相似。你可以直接访问标记了final的外层局部变量，或者实例的字段以及静态变量。<br>
+六、访问局部变量<br>
+可以直接在lambda表达式中访问外层的局部变量<br>
+七、访问对象字段与静态变量 <br>
+和本地变量不同的是，lambda内部对于实例的字段以及静态变量是既可读又可写。该行为和匿名对象是一致的：
+何扩展到lambda上使用的。<br>
+<br><br><br>
+<span id="busuanzi_container_page_pv">  本文总阅读量:<span id="busuanzi_value_page_pv"></span>次</span>
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">HTML</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -202,17 +241,113 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/09/%E7%AC%AC%E4%B8%83%E7%AF%87%E5%8D%9A%E5%AE%A2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2020/07/13/%E7%AC%AC%E5%85%AB%E7%AF%87%E5%8D%9A%E5%AE%A2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          java中@Autowired与@Resource注解的区别
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2020/07/05/%E7%AC%AC%E5%85%AD%E7%AF%87%E5%8D%9A%E5%AE%A2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">超链接打开新窗口</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -239,9 +374,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
