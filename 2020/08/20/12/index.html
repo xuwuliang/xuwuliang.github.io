@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>java中@Autowired与@Resource注解的区别 | xwl的博客</title>
+  <title>Spring security权限控制:@Secured(),@PreAuthorize()及@RolesAllowed() | xwl的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="@Autowired与@Resource共同点:都可以用来装配bean. 都可以写在字段上,或写在setter方法上。不同点:1.@Autowired默认按类型装配（这个注解是属于spring的），如果该类型对象容器中有多个，它会按照变量名称进行装配，否则报错。如果我们想使用bean的id进行装配可以结合@Qualifier注解进行使用。2.@Resource（这个注解属于J2EE的），按照bea">
+  <meta name="description" content="在Spring security的使用中，为了对方法进行权限控制，通常采用的三个注解，就是@Secured(), @PreAuthorize() 及 @RolesAllowed()。 下面是三个注解的简单使用 12@Secured(&amp;#123;&quot;ROLE_ADMIN&quot;&amp;#125;)public User findall(); 12@RolesAllowed(&amp;#123;&amp;q">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java中@Autowired与@Resource注解的区别">
-<meta property="og:url" content="http://yoursite.com/2020/07/13/%E7%AC%AC%E5%85%AB%E7%AF%87%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:title" content="Spring security权限控制:@Secured(),@PreAuthorize()及@RolesAllowed()">
+<meta property="og:url" content="http://yoursite.com/2020/08/20/12/index.html">
 <meta property="og:site_name" content="xwl的博客">
-<meta property="og:description" content="@Autowired与@Resource共同点:都可以用来装配bean. 都可以写在字段上,或写在setter方法上。不同点:1.@Autowired默认按类型装配（这个注解是属于spring的），如果该类型对象容器中有多个，它会按照变量名称进行装配，否则报错。如果我们想使用bean的id进行装配可以结合@Qualifier注解进行使用。2.@Resource（这个注解属于J2EE的），按照bea">
+<meta property="og:description" content="在Spring security的使用中，为了对方法进行权限控制，通常采用的三个注解，就是@Secured(), @PreAuthorize() 及 @RolesAllowed()。 下面是三个注解的简单使用 12@Secured(&amp;#123;&quot;ROLE_ADMIN&quot;&amp;#125;)public User findall(); 12@RolesAllowed(&amp;#123;&amp;q">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-07-13T02:02:56.000Z">
-<meta property="article:modified_time" content="2020-07-13T02:26:02.070Z">
+<meta property="article:published_time" content="2020-08-20T06:05:30.000Z">
+<meta property="article:modified_time" content="2020-08-20T06:35:35.512Z">
 <meta property="article:author" content="xwl">
-<meta property="article:tag" content="java">
+<meta property="article:tag" content="spring">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="xwl的博客" type="application/atom+xml">
@@ -147,31 +147,54 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-第八篇博客" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-12" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      java中@Autowired与@Resource注解的区别
+      Spring security权限控制:@Secured(),@PreAuthorize()及@RolesAllowed()
     </h1>
   
 
         
-        <a href="/2020/07/13/%E7%AC%AC%E5%85%AB%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2020-07-13T02:02:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-13</time>
+        <a href="/2020/08/20/12/" class="archive-article-date">
+  	<time datetime="2020-08-20T06:05:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><br><br><br>@Autowired与@Resource共同点:都可以用来装配bean. 都可以写在字段上,或写在setter方法上。<br><br>不同点:<br>1.@Autowired默认按类型装配（这个注解是属于spring的），如果该类型对象容器中有多个，它会按照变量名称进行装配，否则报错。如果我们想使用bean的id进行装配可以结合@Qualifier注解进行使用。<br><br>2.@Resource（这个注解属于J2EE的），按照bean的id进行装配，可以通过name属性进行指定，如果没有指定name属性，当注解写在字段上时，默认取字段名进行安装名称查找，如果注解写在setter方法上默认取属性名进行装配。当找不到与名称匹配的bean时才按照类型进行装配。但是需要注意的是，如果name属性一旦指定，就只会按照名称进行装配。<br><br>下面这两段代码实现的效果是一样的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">@Qualifier(&quot;userDao&quot;)</span><br><span class="line">private UserDao userDao;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Resource(name&#x3D;&quot;userDao&quot;)</span><br><span class="line">private UserDao userDao;</span><br></pre></td></tr></table></figure>
-<p><br><br><br><br><span id="busuanzi_container_page_pv">  本文总阅读量:<span id="busuanzi_value_page_pv"></span>次</span></p>
-
+        <br>
+<br>
+在Spring security的使用中，为了对方法进行权限控制，通常采用的三个注解，就是@Secured(), @PreAuthorize() 及 @RolesAllowed()。
+下面是三个注解的简单使用
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Secured(&#123;&quot;ROLE_ADMIN&quot;&#125;)</span><br><span class="line">public User findall();</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@RolesAllowed(&#123;&quot;ROLE_ADMIN&quot;&#125;)</span><br><span class="line">public User findall();</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@PreAuthorize(&quot;hasRole(&#39;ROLE_ADMIN&#39;)&quot;)</span><br><span class="line">public User findall();</span><br></pre></td></tr></table></figure>
+<br>
+<h5>在使用前都需要对注解进行开启，下面分别介绍XML和Springboot中开启注解的方法</h5>
+@Secured():<br>
+XML: 
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;global-method-security secured-annotations&#x3D;&quot;enabled&quot;&#x2F;&gt; </span><br></pre></td></tr></table></figure>
+Springboot: 
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@EnableGlobalMethodSecurity(securedEnabled &#x3D; true)</span><br></pre></td></tr></table></figure>
+<hr>
+@RolesAllowed(): <br>
+XML: 
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;global-method-security jsr250-annotations&#x3D;&quot;enabled&quot;&#x2F;&gt; </span><br></pre></td></tr></table></figure>
+Springboot:  
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@EnableGlobalMethodSecurity(jsr250Enabled &#x3D; true)</span><br></pre></td></tr></table></figure>
+<hr>
+@PreAuthorize(): <br>
+XML: 
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;global-method-security pre-post-annotations&#x3D;&quot;enabled&quot;&#x2F;&gt; </span><br></pre></td></tr></table></figure>
+Springboot:  
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@EnableGlobalMethodSecurity(prePostEnabled &#x3D; true)</span><br></pre></td></tr></table></figure>
+<br><br><br>
+<span id="busuanzi_container_page_pv">  本文总阅读量:<span id="busuanzi_value_page_pv"></span>次</span>
       
 
       
@@ -205,7 +228,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
         		</li>
       		
 		</ul>
@@ -272,7 +295,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/13/%E7%AC%AC%E5%85%AB%E7%AF%87%E5%8D%9A%E5%AE%A2/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/08/20/12/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -286,18 +309,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/07/15/%E7%AC%AC%E4%B9%9D%E7%AF%87%E5%8D%9A%E5%AE%A2/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          springMVC中RequestParam注解中name和value两个属性的区别
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/07/09/%E7%AC%AC%E4%B8%83%E7%AF%87%E5%8D%9A%E5%AE%A2/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">JDK1.8的新特性</div>
+    <a href="/2020/08/16/11/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">springboot整合pagehelper插件</div>
       <i class="icon-circle-right"></i>
     </a>
   

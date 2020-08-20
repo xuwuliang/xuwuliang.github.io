@@ -65,7 +65,7 @@
 			
 		</nav>
 		<nav>
-    总文章数 11
+    总文章数 12
 	</nav>
 		<nav class="header-smart-menu">
     		
@@ -149,6 +149,117 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-12" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/20/12/">Spring security权限控制:@Secured(),@PreAuthorize()及@RolesAllowed()</a>
+    </h1>
+  
+
+        
+        <a href="/2020/08/20/12/" class="archive-article-date">
+  	<time datetime="2020-08-20T06:05:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <br>
+<br>
+在Spring security的使用中，为了对方法进行权限控制，通常采用的三个注解，就是@Secured(), @PreAuthorize() 及 @RolesAllowed()。
+下面是三个注解的简单使用
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Secured(&#123;&quot;ROLE_ADMIN&quot;&#125;)</span><br><span class="line">public User findall();</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@RolesAllowed(&#123;&quot;ROLE_ADMIN&quot;&#125;)</span><br><span class="line">public User findall();</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@PreAuthorize(&quot;hasRole(&#39;ROLE_ADMIN&#39;)&quot;)</span><br><span class="line">public User findall();</span><br></pre></td></tr></table></figure>
+<br>
+<h5>在使用前都需要对注解进行开启，下面分别介绍XML和Springboot中开启注解的方法</h5>
+@Secured():<br>
+XML: 
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;global-method-security secured-annotations&#x3D;&quot;enabled&quot;&#x2F;&gt; </span><br></pre></td></tr></table></figure>
+Springboot: 
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@EnableGlobalMethodSecurity(securedEnabled &#x3D; true)</span><br></pre></td></tr></table></figure>
+<hr>
+@RolesAllowed(): <br>
+XML: 
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;global-method-security jsr250-annotations&#x3D;&quot;enabled&quot;&#x2F;&gt; </span><br></pre></td></tr></table></figure>
+Springboot:  
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@EnableGlobalMethodSecurity(jsr250Enabled &#x3D; true)</span><br></pre></td></tr></table></figure>
+<hr>
+@PreAuthorize(): <br>
+XML: 
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;global-method-security pre-post-annotations&#x3D;&quot;enabled&quot;&#x2F;&gt; </span><br></pre></td></tr></table></figure>
+Springboot:  
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@EnableGlobalMethodSecurity(prePostEnabled &#x3D; true)</span><br></pre></td></tr></table></figure>
+<br><br><br>
+<span id="busuanzi_container_page_pv">  本文总阅读量:<span id="busuanzi_value_page_pv"></span>次</span>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/经验//" class="article-tag-list-link color3">经验</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/20/12/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-11" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -290,11 +401,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mybatis</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mybatis</a>
         		</li>
       		
 		</ul>
@@ -385,11 +496,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -1046,100 +1157,6 @@ speed.textProperty().bind(task.valueProperty());
 
 
   
-    <article id="post-第一篇博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/17/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">Springboot前后端时间不一致的解决方法</a>
-    </h1>
-  
-
-        
-        <a href="/2020/06/17/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2020-06-17T02:38:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <br>
-问题：实体类属性使用Timestamp来声明，页面传递到后台或者后台传递到页面的时间将会不一致，总是相差八个小时。
-<br>
-解决方法：在实体类的get方法前面添加下面代码。
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@JsonFormat(pattern &#x3D; &quot;yyyy-MM-dd HH:mm:ss&quot;, timezone &#x3D; &quot;GMT+8&quot;)</span><br></pre></td></tr></table></figure>
-
-<p>样例(以下为交易记录的实体类):</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">public class Sales_record &#123;&#x2F;&#x2F;交易记录类</span><br><span class="line">	</span><br><span class="line">	   private int record_id;&#x2F;&#x2F;编号</span><br><span class="line">	   private String details;&#x2F;&#x2F;交易细节</span><br><span class="line">	   private String pay_way;&#x2F;&#x2F;支付方式</span><br><span class="line">	   private float total_money;&#x2F;&#x2F;总金额</span><br><span class="line">	   private float real_money;&#x2F;&#x2F;实付金额</span><br><span class="line">	   private Timestamp Transaction_date ;&#x2F;&#x2F;交易日期</span><br><span class="line">	   private int number;&#x2F;&#x2F;购买数量</span><br><span class="line">	   </span><br><span class="line">		public int getRecord_id() &#123;</span><br><span class="line">			return record_id;</span><br><span class="line">		&#125;</span><br><span class="line">		public void setRecord_id(int record_id) &#123;</span><br><span class="line">			this.record_id &#x3D; record_id;</span><br><span class="line">		&#125;</span><br><span class="line">		public String getDetails() &#123;</span><br><span class="line">			return details;</span><br><span class="line">		&#125;</span><br><span class="line">		public void setDetails(String details) &#123;</span><br><span class="line">			this.details &#x3D; details;</span><br><span class="line">		&#125;</span><br><span class="line">		public String getPay_way() &#123;</span><br><span class="line">			return pay_way;</span><br><span class="line">		&#125;</span><br><span class="line">		public void setPay_way(String pay_way) &#123;</span><br><span class="line">			this.pay_way &#x3D; pay_way;</span><br><span class="line">		&#125;</span><br><span class="line">		public float getTotal_money() &#123;</span><br><span class="line">			return total_money;</span><br><span class="line">		&#125;</span><br><span class="line">		public void setTotal_money(float total_money) &#123;</span><br><span class="line">			this.total_money &#x3D; total_money;</span><br><span class="line">		&#125;</span><br><span class="line">		public float getReal_money() &#123;</span><br><span class="line">			return real_money;</span><br><span class="line">		&#125;</span><br><span class="line">		public void setReal_money(float real_money) &#123;</span><br><span class="line">			this.real_money &#x3D; real_money;</span><br><span class="line">		&#125;</span><br><span class="line">	@JsonFormat(pattern &#x3D; &quot;yyyy-MM-dd HH:mm:ss&quot;, timezone &#x3D; &quot;GMT+8&quot;)</span><br><span class="line">	public Timestamp getTransaction_date() &#123;</span><br><span class="line">		return Transaction_date;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setTransaction_date(Timestamp transaction_date) &#123;</span><br><span class="line">		Transaction_date &#x3D; transaction_date;</span><br><span class="line">	&#125;</span><br><span class="line">	public int getNumber() &#123;</span><br><span class="line">		return number;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setNumber(int number) &#123;</span><br><span class="line">		this.number &#x3D; number;</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public String toString() &#123;</span><br><span class="line">		return &quot;Sales_record [record_id&#x3D;&quot; + record_id + &quot;, details&#x3D;&quot; + details + &quot;, pay_way&#x3D;&quot; + pay_way</span><br><span class="line">				+ &quot;, total_money&#x3D;&quot; + total_money + &quot;, real_money&#x3D;&quot; + real_money + &quot;, Transaction_date&#x3D;&quot;</span><br><span class="line">				+ Transaction_date + &quot;, number&#x3D;&quot; + number + &quot;]&quot;;</span><br><span class="line">	&#125;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><br><br><br><br><span id="busuanzi_container_page_pv">  本文总阅读量:<span id="busuanzi_value_page_pv"></span>次</span></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">springboot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/问题//" class="article-tag-list-link color3">问题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/17/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1243,11 +1260,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">springboot</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">springboot</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1268,10 +1289,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">mybatis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
             
             <div class="clearfix"></div>
